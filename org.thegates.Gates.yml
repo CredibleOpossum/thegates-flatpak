@@ -1,0 +1,52 @@
+app-id: org.thegates.Gates
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+command: TheGates
+modules:
+  - name: libzmq
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: archive
+        url: 'https://github.com/zeromq/libzmq/archive/v4.3.2.tar.gz'
+        sha256: 02ecc88466ae38cf2c8d79f09cfd2675ba299a439680b64ade733e26a349edeb
+  - name: gates
+    buildsystem: simple
+    build-commands:
+      - 'mv Sandbox.x86_64 "${FLATPAK_DEST}/bin/Sandbox"'
+      - 'mv TheGates.x86_64 "${FLATPAK_DEST}/bin/TheGates"'
+      - 'ln -s "${FLATPAK_DEST}/bin/Sandbox" "${FLATPAK_DEST}/bin/Sandbox.x86_64"'
+      - 'install -Dm644 gates.desktop /app/share/applications/org.thegates.Gates.desktop'
+      - 'install -Dm644 icon_16.png /app/share/icons/hicolor/16x16/apps/org.thegates.Gates.png'
+      - 'install -Dm644 icon_32.png /app/share/icons/hicolor/32x32/apps/org.thegates.Gates.png'
+      - 'install -Dm644 icon_64.png /app/share/icons/hicolor/64x64/apps/org.thegates.Gates.png'
+      - 'install -Dm644 icon_128.png /app/share/icons/hicolor/128x128/apps/org.thegates.Gates.png'
+      - 'install -Dm644 icon_256.png /app/share/icons/hicolor/256x256/apps/org.thegates.Gates.png'
+      - 'install -Dm644 icon_512.png /app/share/icons/hicolor/512x512/apps/org.thegates.Gates.png'
+    sources:
+      - type: archive
+        path: gates_linux.zip
+      - type: file
+        path: gates.desktop	
+      - type: file
+        path: icons/icon_16.png
+      - type: file
+        path: icons/icon_32.png
+      - type: file
+        path: icons/icon_64.png
+      - type: file
+        path: icons/icon_128.png
+      - type: file
+        path: icons/icon_256.png
+      - type: file
+        path: icons/icon_512.png
+finish-args:
+  - '--share=network'
+  - '--socket=x11'
+  - '--socket=wayland'
+  - '--socket=pulseaudio'
+  - '--socket=fallback-x11'
+  - '--device=dri'
+
+
