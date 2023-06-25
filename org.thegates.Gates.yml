@@ -17,16 +17,18 @@ modules:
       - 'mv Sandbox.x86_64 "${FLATPAK_DEST}/bin/Sandbox"'
       - 'mv TheGates.x86_64 "${FLATPAK_DEST}/bin/TheGates"'
       - 'ln -s "${FLATPAK_DEST}/bin/Sandbox" "${FLATPAK_DEST}/bin/Sandbox.x86_64"'
-      - 'install -Dm644 gates.desktop /app/share/applications/org.thegates.Gates.desktop'
-      - 'install -Dm644 icon_16.png /app/share/icons/hicolor/16x16/apps/org.thegates.Gates.png'
-      - 'install -Dm644 icon_32.png /app/share/icons/hicolor/32x32/apps/org.thegates.Gates.png'
-      - 'install -Dm644 icon_64.png /app/share/icons/hicolor/64x64/apps/org.thegates.Gates.png'
-      - 'install -Dm644 icon_128.png /app/share/icons/hicolor/128x128/apps/org.thegates.Gates.png'
-      - 'install -Dm644 icon_256.png /app/share/icons/hicolor/256x256/apps/org.thegates.Gates.png'
-      - 'install -Dm644 icon_512.png /app/share/icons/hicolor/512x512/apps/org.thegates.Gates.png'
+      - 'install -Dm644 gates.desktop /app/share/applications/org.thegates.Gates.desktop' # For some reason files ended with ".x86_64" seem to not install correctly, this is a workaround.
+      - 'install -Dm644 icon_16.png /app/share/icons/hicolor/16x16/apps/${FLATPAK_APPID}.png'
+      - 'install -Dm644 icon_32.png /app/share/icons/hicolor/32x32/apps/${FLATPAK_APPID}.png'
+      - 'install -Dm644 icon_64.png /app/share/icons/hicolor/64x64/apps/${FLATPAK_APPID}.png'
+      - 'install -Dm644 icon_128.png /app/share/icons/hicolor/128x128/apps/${FLATPAK_APPID}.png'
+      - 'install -Dm644 icon_256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_APPID}.png'
+      - 'install -Dm644 icon_512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_APPID}.png'
     sources:
       - type: archive
-        path: gates_linux.zip
+        dest-filename: TheGates_Linux_0.4.1.zip
+        url: https://cdn.matix-media.net/dd/2bb7ce99 # URL is a 3rd party site, itch doesn't allow direct download links. I've confirmed hash matches untouched archive from itch.io.
+        sha256: 9b945457845165905c6acfcecac33e9792b0a3652e9c7da981d638b9d428283a
       - type: file
         path: gates.desktop	
       - type: file
@@ -43,7 +45,7 @@ modules:
         path: icons/icon_512.png
 finish-args:
   - '--share=network'
-  - '--socket=x11'
+  - '--share=ipc'
   - '--socket=wayland'
   - '--socket=pulseaudio'
   - '--socket=fallback-x11'
