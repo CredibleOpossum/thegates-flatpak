@@ -3,6 +3,10 @@ runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: TheGates
+
+cleanup:
+  - '*.cmake'
+
 modules:
   - name: libzmq
     buildsystem: cmake-ninja
@@ -16,14 +20,14 @@ modules:
     build-commands:
       - 'mv Sandbox.x86_64 "${FLATPAK_DEST}/bin/Sandbox"'
       - 'mv TheGates.x86_64 "${FLATPAK_DEST}/bin/TheGates"'
-      - 'ln -s "${FLATPAK_DEST}/bin/Sandbox" "${FLATPAK_DEST}/bin/Sandbox.x86_64"'
-      - 'install -Dm644 gates.desktop /app/share/applications/org.thegates.Gates.desktop' # For some reason files ended with ".x86_64" seem to not install correctly, this is a workaround.
-      - 'install -Dm644 icon_16.png /app/share/icons/hicolor/16x16/apps/${FLATPAK_APPID}.png'
-      - 'install -Dm644 icon_32.png /app/share/icons/hicolor/32x32/apps/${FLATPAK_APPID}.png'
-      - 'install -Dm644 icon_64.png /app/share/icons/hicolor/64x64/apps/${FLATPAK_APPID}.png'
-      - 'install -Dm644 icon_128.png /app/share/icons/hicolor/128x128/apps/${FLATPAK_APPID}.png'
-      - 'install -Dm644 icon_256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_APPID}.png'
-      - 'install -Dm644 icon_512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_APPID}.png'
+      - 'ln -s "${FLATPAK_DEST}/bin/Sandbox" "${FLATPAK_DEST}/bin/Sandbox.x86_64"' # For some reason files ended with ".x86_64" seem to not install correctly, this is a workaround.
+      - 'install -Dm644 gates.desktop /app/share/applications/${FLATPAK_ID}.desktop' 
+      - 'install -Dm644 icon_16.png /app/share/icons/hicolor/16x16/apps/${FLATPAK_ID}.png'
+      - 'install -Dm644 icon_32.png /app/share/icons/hicolor/32x32/apps/${FLATPAK_ID}.png'
+      - 'install -Dm644 icon_64.png /app/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png'
+      - 'install -Dm644 icon_128.png /app/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png'
+      - 'install -Dm644 icon_256.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png'
+      - 'install -Dm644 icon_512.png /app/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png'
     sources:
       - type: archive
         dest-filename: TheGates_Linux_0.4.1.zip
