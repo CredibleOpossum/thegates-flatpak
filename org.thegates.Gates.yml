@@ -3,7 +3,9 @@ runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: TheGates
-
+tags:
+  - proprietary
+  
 cleanup:
   - '*.cmake'
 
