@@ -1,4 +1,4 @@
-app-id: org.thegates.Gates
+app-id: io.itch.nordup.TheGates
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
@@ -23,7 +23,9 @@ modules:
       - 'mv Sandbox.x86_64 "${FLATPAK_DEST}/bin/Sandbox"'
       - 'mv TheGates.x86_64 "${FLATPAK_DEST}/bin/TheGates"'
       - 'ln -s "${FLATPAK_DEST}/bin/Sandbox" "${FLATPAK_DEST}/bin/Sandbox.x86_64"' # For some reason files ended with ".x86_64" seem to not install correctly, this is a workaround.
-      - 'install -Dm644 gates.desktop /app/share/applications/${FLATPAK_ID}.desktop' 
+      - 'install -Dm644 gates.desktop /app/share/applications/${FLATPAK_ID}.desktop'
+      - 'install -Dm644 appdata.xml /app/share/metainfo/${FLATPAK_ID}.appdata.xml'
+      
       - 'install -Dm644 icon_16.png /app/share/icons/hicolor/16x16/apps/${FLATPAK_ID}.png'
       - 'install -Dm644 icon_32.png /app/share/icons/hicolor/32x32/apps/${FLATPAK_ID}.png'
       - 'install -Dm644 icon_64.png /app/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png'
@@ -36,7 +38,9 @@ modules:
         url: https://cdn.matix-media.net/dd/2bb7ce99 # URL is a 3rd party site, itch doesn't allow direct download links. I've confirmed hash matches untouched archive from itch.io.
         sha256: 9b945457845165905c6acfcecac33e9792b0a3652e9c7da981d638b9d428283a
       - type: file
-        path: gates.desktop	
+        path: gates.desktop
+      - type: file
+        path: appdata.xml	
       - type: file
         path: icons/icon_16.png
       - type: file

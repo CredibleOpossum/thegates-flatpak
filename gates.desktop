@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Game;
-Exec=TheGates
-Icon=org.thegates.Gates
+Exec=	
+Icon=io.itch.nordup.TheGates
 Name=The Gates
 Type=Application
